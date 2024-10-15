@@ -7,3 +7,5 @@ src/main/kotlin/com/dataserver
 ├---/resources (contains the configuration YAML for the application)
 └---Application.kt (primary main class)
 ````
+
+Added Google Cloud Build for continuous deployment
