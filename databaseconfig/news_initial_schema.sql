@@ -19,5 +19,10 @@ CREATE TABLE tickers (
     user_id INT REFERENCES users(id),
     ticker VARCHAR(10));
 
+CREATE TABLE sentiment (
+    id SERIAL PRIMARY KEY,
+    article_id INT REFERENCES articles(id),
+    sentiment VARCHAR(255));
+
 CREATE USER news WITH PASSWORD 'news';
 GRANT ALL PRIVILEGES ON DATABASE news_development TO news;

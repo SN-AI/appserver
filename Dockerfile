@@ -1,6 +1,9 @@
 # Use an official Gradle image to build the application
 FROM gradle:8.10.2-jdk21 AS build
 
+# Install PostgreSQL client
+RUN apt-get update && apt-get install -y postgresql-client
+
 # Set the working directory in the container
 WORKDIR /app
 

@@ -1,15 +1,5 @@
-services:
-  postgres:
-    image: postgres:17.0
-    container_name: news-database
-    ports:
-      - '5432:5432'
-    environment:
-      POSTGRES_PASSWORD: 'postgres'
-    volumes:
-      - ./.docker-data/.pg-data:/var/lib/postgresql/data
-      - ./databaseconfig/news_initial_schema.sql:/docker-entrypoint-initdb.d/news_initial_schema.sql
-  app:
+services: 
+ app:
     build:
       context: .
       dockerfile: Dockerfile
