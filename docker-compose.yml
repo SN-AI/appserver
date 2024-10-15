@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:17.0
+    container_name: news-database
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: 'postgres'
+    volumes:
+      - ./.docker-data/.pg-data:/var/lib/postgresql/data
+      - ./databaseconfig/news_initial_schema.sql:/docker-entrypoint-initdb.d/news_initial_schema.sql
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: news-app
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: 'news-database'
+      POSTGRES_PORT: '5432'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'news_development'
+
+networks:
+  default:
+    external:
+      name: appserver_default
